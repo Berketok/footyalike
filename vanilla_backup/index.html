@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footballer Lookalike Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="app.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation / Header -->
+        <header class="glass-header">
+            <div class="logo">⚽ Lookalike AI</div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section active">
+                <h1 class="fade-in-up">Which Footballer <br>Are You?</h1>
+                <p class="subtitle fade-in-up delay-1">Upload your photo or take a selfie to reveal your football twin using AI.</p>
+                <button id="start-btn" class="cta-button fade-in-up delay-2">Find My Lookalike</button>
+            </section>
+
+            <!-- Input Section (Upload / Camera) -->
+            <section id="input-section" class="input-section hidden">
+                <div class="card glass-card">
+                    <div class="tabs">
+                        <button id="tab-upload" class="tab active">Upload Photo</button>
+                        <button id="tab-camera" class="tab">Use Camera</button>
+                    </div>
+
+                    <!-- Upload View -->
+                    <div id="view-upload" class="view-panel active">
+                        <div class="drop-zone" id="drop-zone">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <p>Drag & Drop your photo here</p>
+                            <span class="or-divider">OR</span>
+                            <button class="secondary-btn" onclick="document.getElementById('file-input').click()">Choose File</button>
+                            <input type="file" id="file-input" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <!-- Camera View -->
+                    <div id="view-camera" class="view-panel hidden">
+                        <div class="camera-container">
+                            <video id="camera-feed" autoplay playsinline muted></video>
+                            <canvas id="camera-canvas" hidden></canvas>
+                        </div>
+                        <div class="camera-controls">
+                            <button id="capture-btn" class="icon-btn" aria-label="Capture Photo">
+                                <div class="shutter-inner"></div>
+                            </button>
+                            <button id="switch-camera-btn" class="secondary-btn">Switch Camera</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="loading-section hidden">
+                <div class="loader-container">
+                    <div class="football-loader">⚽</div>
+                    <div class="radar-scan"></div>
+                </div>
+                <h3>Scanning Features...</h3>
+                <p id="loading-text">Analyzing facial structure</p>
+            </section>
+
+            <!-- Result Section -->
+            <section id="result-section" class="result-section hidden">
+                <div class="result-card glass-card">
+                    <div class="match-images">
+                        <div class="user-image-container">
+                            <img id="result-user-img" src="" alt="Your photo">
+                            <span class="label">You</span>
+                        </div>
+                        <div class="vs-badge">VS</div>
+                        <div class="match-reveal">
+                            <div class="footballer-placeholder">
+                                <span>?</span>
+                            </div>
+                            <!-- Result image will be injected here if API returns one, or just text -->
+                        </div>
+                    </div>
+                    
+                    <div class="match-info">
+                        <h2 id="match-name" class="gradient-text">Lionel Messi</h2>
+                        <div class="similarity-bar">
+                            <div class="fill" id="similarity-fill" style="width: 0%"></div>
+                            <span id="similarity-score">0% Match</span>
+                        </div>
+                        <p id="match-reasoning" class="match-desc">Your facial structure and eyes resemble the GOAT based on our AI analysis.</p>
+                    </div>
+
+                    <button id="retry-btn" class="cta-button">Try Again</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by Google Gemini AI</p>
+        </footer>
+    </div>
+</body>
+</html>
